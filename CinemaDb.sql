@@ -66,19 +66,20 @@
 --CustomerId int references Customers(Id)
 --)
 
---1
---Alter Procedure usp_BuyTicket @HallId int, @SessionId int, @MovieId int, @CustomerId int
+----1
+--Alter Procedure usp_BuyTicketss @HallId int, @SessionId int, @MovieId int, @CustomerId int
 --As
+--If Exists(Select * from Buying where HallId = @HallId and SessionId = @SessionId and MovieId = @MovieId and CustomerId = @CustomerId)
 --Begin
---If(Select GetEmptySeat(@HallId, @SessionId) != 0)
---Begin
---Select h.Name, t.Place From Tickets as t
---Join Halls As h
---On
---h.Id = t.HallId
---Group by h.Name, t.Place
+--Print 'yer doludur'
 --End
---End
+--Else
+--Insert into Buying(HallId, SessionId, MovieId, CustomerId)
+--Values(@HallId, @SessionId, @MovieId, @CustomerId)
+
+--Exec usp_BuyTicketss 4,6,5,3
+
+--Select * From Buying
 
 --2
 --ALTER Function GetEmptySeat (@HallId int, @SessionId int)
@@ -106,4 +107,4 @@
 --	Return @Count
 --End
 
-Select dbo.GetEmptySeat (5, 5)
+--Select dbo.GetEmptySeat (5, 5)
